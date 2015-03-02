@@ -32,7 +32,7 @@ class ChoiceSerializer(serializers.ModelSerializer):
 
 
 class QuestionSerializer(serializers.ModelSerializer):
-    stream = serializers.SlugRelatedField(queryset=Stream.objects.all(), slug_field='slug')
+    stream = serializers.SlugRelatedField(queryset=Stream.objects.all(), slug_field='slug', required=False)
     slug = serializers.CharField(required=False)
     choices = ChoiceSerializer(many=True)
 

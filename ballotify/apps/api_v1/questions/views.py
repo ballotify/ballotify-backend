@@ -17,6 +17,10 @@ class QuestionsView(generics.ListCreateAPIView):
     def get_queryset(self):
         return Question.objects.all()
 
+    def perform_create(self, serializer):
+        serializer.validated_data["user"] = self.request.user
+        serializer.save()
+
 questions_view = QuestionsView.as_view()
 
 

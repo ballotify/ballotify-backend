@@ -3,12 +3,14 @@ from django.db import models
 from model_utils.models import TimeStampedModel
 from django_extensions.db.fields import ShortUUIDField
 
+from accounts.models import User
 from streams.models import Stream
 from core.utils import id_generator
 
 
 class Question(TimeStampedModel):
-    stream = models.ForeignKey(Stream, related_name="questions")
+    user = models.ForeignKey(User, related_name="questions")
+    stream = models.ForeignKey(Stream, related_name="questions", null=True, blank=True)
 
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, unique=True)
