@@ -3,7 +3,7 @@ from rest_framework import generics, permissions
 from questions.models import Question
 from core.utils import memoized
 from .serializers import QuestionSerializer, QuestionDetailSerializer, ChoiceSerializer, VoteSerializer
-from .permissions import IsStreamOwnerOrReadOnly, IsVotedOrPostOnly
+from .permissions import IsQuestionOwnerOrReadOnly, IsStreamOwnerOrReadOnly, IsVotedOrPostOnly
 from .utils import get_client_ip
 
 
@@ -12,6 +12,7 @@ class QuestionsView(generics.ListCreateAPIView):
     List/Create questions.
 
     """
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     serializer_class = QuestionSerializer
 
     def get_queryset(self):
@@ -39,7 +40,7 @@ class QuestionDetailView(QuestionMixin, generics.RetrieveUpdateDestroyAPIView):
     Retrieve/Update/Destroy question.
 
     """
-    permission_classes = (permissions.AllowAny,)
+    permission_classes = (IsQuestionOwnerOrReadOnly,)
     serializer_class = QuestionDetailSerializer
     lookup_field = "slug"
 

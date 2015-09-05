@@ -6,4 +6,5 @@ urlpatterns = patterns(
 
     url(r'^$', 'user_detail_view', name='user-detail'),
     url(r'^streams/$', 'user_streams_view', name='user-streams'),
+    url(r'^questions/$', 'user_questions_view', name='user-questions'),
 )

@@ -10,6 +10,15 @@ class IsStreamOwnerOrReadOnly(BasePermission):
         return request.method in SAFE_METHODS or view.get_question().stream.owner == request.user
 
 
+class IsQuestionOwnerOrReadOnly(BasePermission):
+    """
+    Check if request is safe or authenticated user is owner of the question.
+
+    """
+    def has_permission(self, request, view):
+        return request.method in SAFE_METHODS or view.get_question().user == request.user
+
+
 class IsVotedOrPostOnly(BasePermission):
     """
     Check if authenticated user has voted this question.

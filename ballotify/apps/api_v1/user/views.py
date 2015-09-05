@@ -2,7 +2,9 @@ from rest_framework import generics
 
 from .serializers import UserSerializer
 from ..streams.serializers import StreamSerializer
+from ..questions.serializers import QuestionSerializer
 from accounts.models import User
+from questions.models import Question
 from streams.models import Stream
 
 
@@ -32,3 +34,20 @@ class UserStreamsView(generics.ListAPIView):
         return self.request.user.owned_streams.public()
 
 user_streams_view = UserStreamsView.as_view()
+
+
+class UserQuestionsView(generics.ListAPIView):
+    """
+    List/Create questions.
+
+    """
+    serializer_class = QuestionSerializer
+
+    def get_queryset(self):
+        return Question.objects.filter(user=self.request.user)
+
+    def perform_create(self, serializer):
+        serializer.validated_data["user"] = self.request.user
+        serializer.save()
+
+user_questions_view = UserQuestionsView.as_view()
