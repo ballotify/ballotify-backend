@@ -11,8 +11,8 @@ import uuid
 class Migration(migrations.Migration):
 
     dependencies = [
+        ('streams', '0001_initial'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('streams', '0002_auto_20150301_1119'),
     ]
 
     operations = [

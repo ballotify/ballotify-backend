@@ -22,12 +22,11 @@ class Migration(migrations.Migration):
                 ('modified', model_utils.fields.AutoLastModifiedField(default=django.utils.timezone.now, verbose_name='modified', editable=False)),
                 ('is_default', models.BooleanField(default=False)),
                 ('title', models.CharField(max_length=255)),
-                ('slug', models.SlugField(max_length=255)),
+                ('slug', models.SlugField(unique=True, max_length=255)),
             ],
             options={
                 'ordering': ('-created',),
             },
-            bases=(models.Model,),
         ),
         migrations.CreateModel(
             name='StreamMembership',
@@ -41,23 +40,20 @@ class Migration(migrations.Migration):
             options={
                 'ordering': ('-created',),
             },
-            bases=(models.Model,),
-        ),
-        migrations.AlterUniqueTogether(
-            name='streammembership',
-            unique_together=set([('stream', 'user')]),
         ),
         migrations.AddField(
             model_name='stream',
             name='followers',
             field=models.ManyToManyField(related_name='followed_streams', through='streams.StreamMembership', to=settings.AUTH_USER_MODEL),
-            preserve_default=True,
         ),
         migrations.AddField(
             model_name='stream',
             name='owner',
             field=models.ForeignKey(related_name='owned_streams', to=settings.AUTH_USER_MODEL),
-            preserve_default=True,
+        ),
+        migrations.AlterUniqueTogether(
+            name='streammembership',
+            unique_together=set([('stream', 'user')]),
         ),
         migrations.AlterUniqueTogether(
             name='stream',
