@@ -39,7 +39,7 @@ class QuestionDetailView(QuestionMixin, generics.RetrieveUpdateDestroyAPIView):
     Retrieve/Update/Destroy question.
 
     """
-    permission_classes = (permissions.IsAuthenticated, IsStreamOwnerOrReadOnly,)
+    permission_classes = (permissions.AllowAny,)
     serializer_class = QuestionDetailSerializer
     lookup_field = "slug"
 
