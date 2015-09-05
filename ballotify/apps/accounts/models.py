@@ -54,6 +54,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(default=timezone.now)
 
     # Facebook
+    facebook_id = models.CharField(max_length=255, unique=True)
     username = models.CharField(max_length=255, unique=True)
     birthday = models.DateField(blank=True, null=True)
     gender = models.CharField(max_length=255, blank=True)

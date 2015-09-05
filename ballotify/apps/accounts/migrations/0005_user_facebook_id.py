@@ -2,20 +2,19 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-import django_extensions.db.fields
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('questions', '0002_auto_20150301_0938'),
+        ('accounts', '0004_auto_20150830_1620'),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='choice',
-            name='uuid',
-            field=django_extensions.db.fields.ShortUUIDField(default='asdad', max_length=8, editable=False, blank=True),
+            model_name='user',
+            name='facebook_id',
+            field=models.CharField(default=1, unique=True, max_length=255),
             preserve_default=False,
         ),
     ]

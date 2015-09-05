@@ -1,11 +1,11 @@
+import uuid
 from django.db import models
 
 from model_utils.models import TimeStampedModel
-from django_extensions.db.fields import ShortUUIDField
+from shortuuid import ShortUUID
 
 from accounts.models import User
 from streams.models import Stream
-from core.utils import id_generator
 
 
 class Question(TimeStampedModel):
@@ -23,19 +23,19 @@ class Question(TimeStampedModel):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = id_generator()
+            self.slug = ShortUUID().random(length=10)
 
         return super(Question, self).save(*args, **kwargs)
 
 
 class Choice(TimeStampedModel):
-    uuid = ShortUUIDField(db_index=True)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     question = models.ForeignKey(Question, related_name="choices")
 
     title = models.CharField(max_length=255)
 
     class Meta:
-        ordering = ('-created',)
+        ordering = ('created',)
 
     def __unicode__(self):
         return self.title

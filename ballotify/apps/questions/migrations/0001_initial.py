@@ -2,29 +2,31 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-import django.utils.timezone
 import model_utils.fields
+import django.utils.timezone
+from django.conf import settings
+import uuid
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('streams', '0001_initial'),
+        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+        ('streams', '0002_auto_20150301_1119'),
     ]
 
     operations = [
         migrations.CreateModel(
             name='Choice',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('created', model_utils.fields.AutoCreatedField(default=django.utils.timezone.now, verbose_name='created', editable=False)),
                 ('modified', model_utils.fields.AutoLastModifiedField(default=django.utils.timezone.now, verbose_name='modified', editable=False)),
+                ('id', models.UUIDField(default=uuid.uuid4, serialize=False, editable=False, primary_key=True)),
                 ('title', models.CharField(max_length=255)),
             ],
             options={
-                'ordering': ('-created',),
+                'ordering': ('created',),
             },
-            bases=(models.Model,),
         ),
         migrations.CreateModel(
             name='Question',
@@ -33,18 +35,17 @@ class Migration(migrations.Migration):
                 ('created', model_utils.fields.AutoCreatedField(default=django.utils.timezone.now, verbose_name='created', editable=False)),
                 ('modified', model_utils.fields.AutoLastModifiedField(default=django.utils.timezone.now, verbose_name='modified', editable=False)),
                 ('title', models.CharField(max_length=255)),
-                ('slug', models.SlugField(max_length=255)),
-                ('stream', models.ForeignKey(related_name='questions', to='streams.Stream')),
+                ('slug', models.SlugField(unique=True, max_length=255)),
+                ('stream', models.ForeignKey(related_name='questions', blank=True, to='streams.Stream', null=True)),
+                ('user', models.ForeignKey(related_name='questions', to=settings.AUTH_USER_MODEL)),
             ],
             options={
                 'ordering': ('-created',),
             },
-            bases=(models.Model,),
         ),
         migrations.AddField(
             model_name='choice',
             name='question',
             field=models.ForeignKey(related_name='choices', to='questions.Question'),
-            preserve_default=True,
         ),
     ]

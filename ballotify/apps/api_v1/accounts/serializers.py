@@ -8,8 +8,8 @@ class AccountSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('username', 'name', 'link',)
-        read_only_fields = ('name', 'link',)
+        fields = ('username', 'name', 'link', 'facebook_id')
+        read_only_fields = ('name', 'link', 'facebook_id')
 
     def validate_username(self, username):
         if not User.objects.filter(username=username).exists():

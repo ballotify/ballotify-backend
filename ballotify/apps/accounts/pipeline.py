@@ -7,6 +7,7 @@ def create_user(strategy, details, response, user=None, *args, **kwargs):
         return {'is_new': False}
 
     fields = {
+        'facebook_id': response.get('id'),
         'email': details.get('email'),
         'username': details.get('username'),
         'name': details.get('fullname'),
