@@ -8,12 +8,23 @@ from accounts.models import User
 from streams.models import Stream
 
 
+class QuestionQueryset(models.QuerySet):
+    def public(self):
+        return self.filter(is_private=False)
+
+
 class Question(TimeStampedModel):
     user = models.ForeignKey(User, related_name="questions")
     stream = models.ForeignKey(Stream, related_name="questions", null=True, blank=True)
 
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, unique=True)
+
+    is_anonymous = models.BooleanField(default=False)
+    is_multiple = models.BooleanField(default=False)
+    is_private = models.BooleanField(default=False)
+
+    objects = QuestionQueryset.as_manager()
 
     class Meta:
         ordering = ('-created',)

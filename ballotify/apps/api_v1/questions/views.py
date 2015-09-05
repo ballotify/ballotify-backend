@@ -15,7 +15,7 @@ class QuestionsView(generics.ListCreateAPIView):
     serializer_class = QuestionSerializer
 
     def get_queryset(self):
-        return Question.objects.all()
+        return Question.objects.public()
 
     def perform_create(self, serializer):
         serializer.validated_data["user"] = self.request.user
