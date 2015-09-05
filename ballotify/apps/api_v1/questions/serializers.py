@@ -24,12 +24,11 @@ class VoteChoiceSerializer(serializers.ModelSerializer):
 
 class VoteSerializer(serializers.ModelSerializer):
     choices = VoteChoiceSerializer(many=True)
-    user = serializers.SlugRelatedField(read_only=True, slug_field='username')
 
     class Meta:
         model = Vote
-        fields = ('choices', 'user_agent', 'ip', 'user')
-        read_only_fields = ('user_agent', 'ip', 'user')
+        fields = ('choices', 'user_agent', 'ip',)
+        read_only_fields = ('user_agent', 'ip',)
 
     def validate(self, attrs):
         question = self.context['view'].get_question()

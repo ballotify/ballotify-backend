@@ -128,7 +128,7 @@ REST_FRAMEWORK = {
 }
 
 AUTHENTICATION_BACKENDS = (
-    'social.backends.facebook.FacebookOAuth2',
+    'accounts.backends.FacebookAuth',
     'django.contrib.auth.backends.ModelBackend',
 )
 

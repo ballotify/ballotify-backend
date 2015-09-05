@@ -9,7 +9,6 @@ def create_user(strategy, details, response, user=None, *args, **kwargs):
     fields = {
         'facebook_id': response.get('id'),
         'email': details.get('email'),
-        'username': details.get('username'),
         'name': details.get('fullname'),
         'gender': response.get('gender'),
         'birthday': datetime.strptime(response.get('birthday'), "%m/%d/%Y") if response.get('birthday') else None,

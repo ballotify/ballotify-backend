@@ -55,22 +55,17 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     # Facebook
     facebook_id = models.CharField(max_length=255, unique=True)
-    username = models.CharField(max_length=255, unique=True)
     birthday = models.DateField(blank=True, null=True)
     gender = models.CharField(max_length=255, blank=True)
     link = models.CharField(max_length=255, blank=True)
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["username"]
+    REQUIRED_FIELDS = []
 
     objects = UserManager()
 
     class Meta:
         ordering = ('email', 'name')
-
-    def save(self, *args, **kwargs):
-        self.username = slugify(unidecode(u"{}".format(self.username)))
-        return super(User, self).save(*args, **kwargs)
 
     def __str__(self):
         return '{name} <{email}>'.format(name=self.name, email=self.email)
