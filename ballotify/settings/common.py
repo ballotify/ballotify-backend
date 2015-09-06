@@ -147,7 +147,7 @@ SOCIAL_AUTH_PIPELINE = (
     # 'social.pipeline.user.user_details',
 )
 
-SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'public_profile', 'user_birthday']
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'public_profile']
 
 JWT_AUTH = {
     'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=2)

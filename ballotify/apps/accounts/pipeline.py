@@ -1,4 +1,3 @@
-from datetime import datetime
 from .models import User
 
 
@@ -11,7 +10,7 @@ def create_user(strategy, details, response, user=None, *args, **kwargs):
         'email': details.get('email'),
         'name': details.get('fullname'),
         'gender': response.get('gender'),
-        'birthday': datetime.strptime(response.get('birthday'), "%m/%d/%Y") if response.get('birthday') else None,
+        # 'birthday': datetime.strptime(response.get('birthday'), "%m/%d/%Y") if response.get('birthday') else None,
         'link': response.get('link'),
     }
 
