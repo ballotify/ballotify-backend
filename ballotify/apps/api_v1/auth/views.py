@@ -35,8 +35,4 @@ login_view = LoginView.as_view()
 
 @psa()
 def login_social_user(request, backend):
-    try:
-        return request.backend.do_auth(request.data.get('token'), ajax=True)
-    except Exception:
-        # TODO: Time to log something smart here.
-        pass
+    return request.backend.do_auth(request.data.get('token'), ajax=True)
