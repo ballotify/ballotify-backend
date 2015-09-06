@@ -83,11 +83,12 @@ class ChoiceSerializer(serializers.ModelSerializer):
 class QuestionSerializer(serializers.ModelSerializer):
     stream = serializers.SlugRelatedField(queryset=Stream.objects.all(), slug_field='slug', required=False)
     slug = serializers.CharField(required=False)
+    is_voted = serializers.SerializerMethodField()
     choices = ChoiceSerializer(many=True)
 
     class Meta:
         model = Question
-        fields = ('stream', 'title', 'slug', 'choices', 'modified', 'created',)
+        fields = ('stream', 'title', 'slug', 'choices', 'modified', 'created', 'is_voted')
 
     @transaction.atomic
     def create(self, validated_data):
@@ -108,6 +109,13 @@ class QuestionSerializer(serializers.ModelSerializer):
         Choice.objects.bulk_create(
             [Choice(question=question, **choice_data) for choice_data in choices_data]
         )
+
+    def get_is_voted(self, question):
+        request = self.context.get("request")
+        if not request.user.is_authenticated():
+            return False
+
+        return question.votes.filter(user=request.user).exists()
 
 
 class QuestionDetailSerializer(QuestionSerializer):
