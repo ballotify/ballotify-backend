@@ -1,4 +1,5 @@
 import os
+import datetime
 from django.core.exceptions import ImproperlyConfigured
 
 from .common import *
@@ -33,6 +34,13 @@ ADMINS = (
 )
 
 ALLOWED_HOSTS = ["api.ballotify.com"]
+
+JWT_AUTH = {
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1),
+    # TODO: issues with import if use it in correct way
+    # 'JWT_PAYLOAD_HANDLER': 'api_v1.core.auth.utils.jwt_payload_handler'
+}
+
 
 SOCIAL_AUTH_FACEBOOK_KEY = get_env_variable("BALLOTIFY_SOCIAL_AUTH_FACEBOOK_KEY")
 SOCIAL_AUTH_FACEBOOK_SECRET = get_env_variable("BALLOTIFY_SOCIAL_AUTH_FACEBOOK_SECRET")
