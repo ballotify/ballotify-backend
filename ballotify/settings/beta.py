@@ -4,6 +4,8 @@ from django.core.exceptions import ImproperlyConfigured
 
 from .common import *
 
+DEBUG = False
+TEMPLATE_DEBUG = False
 
 def get_env_variable(var_name):
     """
