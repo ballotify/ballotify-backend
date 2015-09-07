@@ -143,7 +143,7 @@ SOCIAL_AUTH_PIPELINE = (
     # 'social.pipeline.user.get_username',
     'accounts.pipeline.create_user',
     'social.pipeline.social_auth.associate_user',
-    'accounts.pipeline.create_default_stream',
+    # 'accounts.pipeline.create_default_stream',
     # 'social.pipeline.user.user_details',
 )
 
