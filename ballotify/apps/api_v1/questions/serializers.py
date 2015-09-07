@@ -89,7 +89,11 @@ class QuestionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Question
-        fields = ('stream', 'title', 'slug', 'choices', 'modified', 'created', 'is_voted', 'is_owner')
+        fields = (
+            'stream', 'title', 'slug', 'choices', 'modified', 'created', 'is_voted', 'is_owner', 'is_anonymous',
+            'is_multiple', 'is_private', 'is_randomized'
+        )
+        read_only_fields = ('slug', 'modified', 'created', )
 
     @transaction.atomic
     def create(self, validated_data):

@@ -23,6 +23,7 @@ class Question(TimeStampedModel):
     is_anonymous = models.BooleanField(default=False)
     is_multiple = models.BooleanField(default=False)
     is_private = models.BooleanField(default=False)
+    is_randomized = models.BooleanField(default=False)
 
     objects = QuestionQueryset.as_manager()
 
