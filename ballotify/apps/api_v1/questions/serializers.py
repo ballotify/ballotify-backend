@@ -63,12 +63,26 @@ class VoteSerializer(serializers.ModelSerializer):
         ) for choice_data in choices_data])
 
 
+class ChoiceListSerializer(serializers.ListSerializer):
+    def to_representation(self, data):
+        iterable = data.all()
+
+        view = self.context['view']
+        if hasattr(view, 'get_question') and self.context['view'].get_question().is_randomized:
+            iterable = iterable.order_by('?')
+
+        return [
+            self.child.to_representation(item) for item in iterable
+        ]
+
+
 class ChoiceSerializer(serializers.ModelSerializer):
     vote_choices = serializers.SerializerMethodField()
     votes_count = serializers.SerializerMethodField()
 
     class Meta:
         model = Choice
+        list_serializer_class = ChoiceListSerializer
         fields = ('id', 'title', 'vote_choices', 'votes_count')
         read_only_fields = ('id',)
 
