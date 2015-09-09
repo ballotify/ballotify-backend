@@ -10,7 +10,7 @@ class Vote(TimeStampedModel):
     question = models.ForeignKey(Question, related_name="votes")
 
     user = models.ForeignKey(User, related_name="votes")
-    user_agent = models.CharField(max_length=255, blank=True)
+    user_agent = models.TextField(blank=True)
     ip = models.CharField(max_length=255, blank=True)
 
     class Meta:
