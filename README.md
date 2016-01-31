@@ -1,7 +1,7 @@
-Ballotify 2.0
-==============
+Ballotify backend
+==================
 
-[![Circle CI](https://circleci.com/gh/vasyabigi/ballotify/tree/master.svg?style=svg)](https://circleci.com/gh/vasyabigi/ballotify/tree/master)
+[![Circle CI](https://circleci.com/gh/ballotify/ballotify-backend.svg?style=svg)](https://circleci.com/gh/ballotify/ballotify-backend)
 
 ## Installation ##
 
