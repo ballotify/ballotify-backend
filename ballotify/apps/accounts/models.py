@@ -1,9 +1,6 @@
 from django.db import models
 from django.utils import timezone
-from django.template.defaultfilters import slugify
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
-
-from unidecode import unidecode
 
 
 class UserManager(BaseUserManager):

@@ -7,6 +7,7 @@ from .common import *
 DEBUG = False
 TEMPLATE_DEBUG = False
 
+
 def get_env_variable(var_name):
     """
     Get the environment variable or return exception.
@@ -46,8 +47,7 @@ JWT_AUTH = {
 
 SOCIAL_AUTH_FACEBOOK_KEY = get_env_variable("BALLOTIFY_SOCIAL_AUTH_FACEBOOK_KEY")
 SOCIAL_AUTH_FACEBOOK_SECRET = get_env_variable("BALLOTIFY_SOCIAL_AUTH_FACEBOOK_SECRET")
-# 1687518998148246
-# e22e1cbdf4a9b622e815b9930806965d
+
 
 RAVEN_CONFIG = {
     'dsn': get_env_variable("BALLOTIFY_SENTRY_DSN"),

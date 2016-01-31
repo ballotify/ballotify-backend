@@ -35,17 +35,15 @@ class UserTestCase(BaseTestCase):
 
         # Check response:
         self.assertDictContainsSubset({
-            u'username': u'pedro',
             u'name': u'John Doe',
             u'gender': u'male',
-            u'email': u'john1@example.com'
+            u'email': u'john0@example.com'
         }, response_json)
 
         # Check db:
-        self.assertEqual(self.user.username, "pedro")
         self.assertEqual(self.user.name, "John Doe")
         self.assertEqual(self.user.gender, "male")
-        self.assertEqual(self.user.email, "john1@example.com")
+        self.assertEqual(self.user.email, "john0@example.com")
 
     def test_update_user_details_return_updated_user(self):
         data = {
@@ -59,13 +57,12 @@ class UserTestCase(BaseTestCase):
 
         # Check response:
         self.assertDictContainsSubset({
-            u'username': u'pedro',
             u'name': u'Rambo 4',
             u'gender': u'male'
         }, response_json)
 
         # Check db:
-        user = User.objects.get(username="pedro")
+        user = User.objects.get(email=self.user.email)
         self.assertEqual(user.name, "Rambo 4")
 
     def test_get_user_streams_return_valid_streams_list(self):

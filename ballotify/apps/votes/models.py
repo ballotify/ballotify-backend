@@ -22,7 +22,7 @@ class Vote(TimeStampedModel):
 
 
 # Possible data about each vote:
-# https://developers.facebook.com/docs/graph-api/reference/v2.2/user
+# https://developers.facebook.com/docs/graph-api/reference/v2.4/user
 # https://docs.djangoproject.com/en/1.7/ref/contrib/gis/geoip/
 # https://github.com/selwin/python-user-agents
 
