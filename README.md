@@ -23,7 +23,7 @@ source ballotify/bin/activate
 ### Clone the code ###
 
 ```bash
-git clone YOUR-CUSTOM-REPO-LINK/ballotify.git
+git clone git@github.com:ballotify/ballotify-backend.git
 ```
 
 ### Install requirements ###
