@@ -1,7 +1,7 @@
 Ballotify backend
 ==================
 
-[![Circle CI](https://circleci.com/gh/ballotify/ballotify-backend.svg?style=svg)](https://circleci.com/gh/ballotify/ballotify-backend)
+[![Circle CI](https://circleci.com/gh/ballotify/django-backend.svg?style=svg)](https://circleci.com/gh/ballotify/django-backend)
 
 ## Installation ##
 
